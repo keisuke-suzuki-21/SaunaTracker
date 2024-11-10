@@ -7,7 +7,7 @@ class QrCodeGenerator
 
         # entry_url = "#{base_url}/api/v1/transactions/entry?store_id=#{store_id}"
         entry_url = "#{base_url}/entry?store_id=#{store_id}&action=entry"
-        exit_url = "#{base_url}/api/v1/transactions/exit?store_id=#{store_id}"
+        exit_url = "#{base_url}/exit?store_id=#{store_id}&action=exit"
         
         save_qr_code(entry_url, "store_#{store_id}_entry.png")
         save_qr_code(exit_url, "store_#{store_id}_exit.png")

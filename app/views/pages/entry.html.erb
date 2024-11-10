@@ -8,14 +8,12 @@
   <h1>QRコードからのリクエストを処理中...</h1>
   
   <script>
-    // store_idとactionを取得
     const storeId = "<%= @store_id %>";
-    const action = "<%= @action %>";
+    const action = "<%= @action %>";  // 'entry' または 'exit' が入る
 
-    console.log("Store ID:", storeId); // 変数確認用ログ
-    console.log("Action:", action);     // 変数確認用ログ
+    console.log("Store ID:", storeId);
+    console.log("Action:", action);
 
-    // APIエンドポイントにPOSTリクエストを送信
     fetch(`/api/v1/transactions/${action}`, {
       method: 'POST',
       headers: {
@@ -27,7 +25,7 @@
     .then(response => response.json())
     .then(data => {
       if (data.message) {
-        alert(data.message); // 成功時のメッセージ表示
+        alert(data.message);
       } else {
         alert("エラーが発生しました：" + data.error);
       }

@@ -28,6 +28,9 @@ module Api
   
           if transaction
             transaction.update(action: 'exit', action_timestamp: Time.zone.now)
+
+            # Customerレコードのexit_timeを現在時刻で更新
+            @customer.update(exit_time: Time.zone.now)
             render json: { message: 'Exit recorded', transaction: transaction }, status: :ok
           else
             render json: { error: 'No entry record found for this customer' }, status: :not_found
@@ -50,7 +53,7 @@ module Api
           end
   
           # UUIDから顧客を検索または新規作成
-          @customer = Customer.find_or_create_by(uuid: cookies[:customer_uuid], entry_time: Time.zone.now)
+          @customer = Customer.find_or_create_by(uuid: cookies[:customer_uuid])
         end
 
         def determine_time_of_day(current_time)
