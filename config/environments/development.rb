@@ -17,6 +17,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # ngrokからのアクセスを受け付ける
+  config.hosts << "1426-2400-2410-bf63-6600-8dbf-ac07-6900-8c0b.ngrok-free.app" 
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?

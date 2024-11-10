@@ -10,4 +10,4 @@ class Transaction < ApplicationRecord
     def calculate_duration(entry_time, exit_time)
       self.duration = (exit_time - entry_time).to_i / 60 # 分単位で計算
     end
-  end
+end

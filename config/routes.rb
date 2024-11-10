@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/entry', to: 'pages#entry'
+
   namespace :api do
     namespace :v1 do
 

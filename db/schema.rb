@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_02_014358) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_083829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
-    t.bigint "store_id", null: false
     t.datetime "entry_time", null: false
     t.datetime "exit_time"
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_customers_on_store_id"
   end
 
   create_table "histories", force: :cascade do |t|
@@ -54,7 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_02_014358) do
     t.index ["store_id"], name: "index_transactions_on_store_id"
   end
 
-  add_foreign_key "customers", "stores"
   add_foreign_key "histories", "transactions"
   add_foreign_key "transactions", "customers"
   add_foreign_key "transactions", "stores"
