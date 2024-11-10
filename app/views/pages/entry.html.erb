@@ -1,0 +1,38 @@
+<!-- app/views/pages/qr_entry.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Entry</title>
+</head>
+<body>
+  <h1>QRコードからのリクエストを処理中...</h1>
+  
+  <script>
+    // store_idとactionを取得
+    const storeId = "<%= @store_id %>";
+    const action = "<%= @action %>";
+
+    console.log("Store ID:", storeId); // 変数確認用ログ
+    console.log("Action:", action);     // 変数確認用ログ
+
+    // APIエンドポイントにPOSTリクエストを送信
+    fetch(`/api/v1/transactions/${action}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ store_id: storeId })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message) {
+        alert(data.message); // 成功時のメッセージ表示
+      } else {
+        alert("エラーが発生しました：" + data.error);
+      }
+    })
+    .catch(error => console.error('エラー:', error));
+  </script>
+</body>
+</html>
