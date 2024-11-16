@@ -7,18 +7,29 @@ module Api
   
         # POST /api/v1/transactions/entry
         def entry
-          transaction = @store.transactions.create(
-            customer_id: @customer.id,
-            action: 'entry',
-            action_timestamp: Time.zone.now,
-            day_of_week: Time.zone.now.wday,
-            time_of_day: determine_time_of_day(Time.zone.now)
-          )
-  
-          if transaction.persisted?
-            render json: { message: 'Entry recorded', transaction: transaction }, status: :created
+          # すでに同じ店舗で同じ顧客がエントリーしているか確認
+          existing_transaction = @store.transactions.find_by(customer_id: @customer.id, action: 'entry')
+
+          if existing_transaction
+            # すでにエントリー済みの場合
+            render json: { error: 'Customer is already checked in' }, status: :unprocessable_entity
           else
-            render json: { error: 'Entry failed', details: transaction.errors.full_messages }, status: :unprocessable_entity
+            # @customerのentry_timeを設定
+            unless @customer.entry_time
+              @customer.update(entry_time: Time.zone.now)
+            end
+            transaction = @store.transactions.create(
+              customer_id: @customer.id,
+              action: 'entry',
+              action_timestamp: Time.zone.now,
+              day_of_week: Time.zone.now.wday,
+              time_of_day: determine_time_of_day(Time.zone.now)
+            )
+            if transaction.persisted?
+              render json: { message: 'Entry recorded', transaction: transaction }, status: :created
+            else
+              render json: { error: 'Entry failed', details: transaction.errors.full_messages }, status: :unprocessable_entity
+            end
           end
         end
   
@@ -52,8 +63,13 @@ module Api
             cookies[:customer_uuid] = { value: SecureRandom.uuid, expires: 1.year.from_now }
           end
   
-          # UUIDから顧客を検索または新規作成
-          @customer = Customer.find_or_create_by(uuid: cookies[:customer_uuid])
+          # UUIDで顧客を検索
+          @customer = Customer.find_by(uuid: cookies[:customer_uuid])
+
+          # 顧客が見つからなければ新規作成
+          if @customer.nil?
+            @customer = Customer.create(uuid: cookies[:customer_uuid], entry_time: Time.zone.now)
+          end
         end
 
         def determine_time_of_day(current_time)

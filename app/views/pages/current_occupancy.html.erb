@@ -1,0 +1,46 @@
+<!-- app/views/pages/current_occupancy.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Sauna Occupancy</title>
+  <meta name="csrf-token" content="<%= csrf_meta_tags %>">
+</head>
+<body>
+  <h1>リアルタイムサウナ利用者数</h1>
+  <div id="occupancy">
+    サウナ利用者数を取得しています...
+  </div>
+
+  <script>
+    // サウナ店舗のID（例として1を設定）
+    const storeId = 1;
+
+    // APIリクエストを送信
+    fetch(`/api/v1/stores/${storeId}/current_occupancy`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.current_occupancy !== undefined) {
+        // 利用者数を表示
+        document.getElementById('occupancy').innerText =
+          `現在の利用者数: ${data.current_occupancy}`;
+      } else {
+        // エラー表示
+        document.getElementById('occupancy').innerText =
+          `エラー: ${data.error}`;
+      }
+    })
+    .catch(error => {
+      // ネットワークエラーなどのハンドリング
+      console.error('エラー:', error);
+      document.getElementById('occupancy').innerText =
+        'サウナ利用者数の取得中にエラーが発生しました。';
+    });
+  </script>
+</body>
+</html>

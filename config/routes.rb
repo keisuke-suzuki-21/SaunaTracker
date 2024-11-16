@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/entry', to: 'pages#entry'
   get '/exit', to: 'pages#exit'
+  get 'pages/current_occupancy', to: 'pages#current_occupancy'
 
   namespace :api do
     namespace :v1 do
