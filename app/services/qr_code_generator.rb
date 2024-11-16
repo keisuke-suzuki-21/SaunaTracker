@@ -3,7 +3,7 @@ require 'rqrcode'
 
 class QrCodeGenerator
     def self.generate_for_store(store_id)
-        base_url = Rails.env.production? ? "https://example.com" : "https://1426-2400-2410-bf63-6600-8dbf-ac07-6900-8c0b.ngrok-free.app"
+        base_url = Rails.env.production? ? "https://example.com" : "https://a55e-2400-2410-bf63-6600-517c-8da8-c907-7bf1.ngrok-free.app"
 
         # entry_url = "#{base_url}/api/v1/transactions/entry?store_id=#{store_id}"
         entry_url = "#{base_url}/entry?store_id=#{store_id}&action=entry"

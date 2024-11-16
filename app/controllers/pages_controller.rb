@@ -10,4 +10,9 @@ class PagesController < ApplicationController
         @action = params[:action]
         render :entry #HTMLビューをレンダリング
     end
+
+    def current_occupancy
+        # ビューのみをレンダリング
+        render :current_occupancy
+    end
 end
