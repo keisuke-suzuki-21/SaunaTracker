@@ -4,4 +4,9 @@ class Store < ApplicationRecord
 
     validates :name, presence: true
     validates :location, presence: true
+
+    # リアルタイム利用者数を計算して返す
+  def current_occupancy
+    transactions.where(action: 'entry').count
+  end
 end
