@@ -1,15 +1,150 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* ベーススタイル */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* レイアウト */
+  .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: #ecf0f1;
+  }
+  
+  /* グローバルナビゲーション */
+  .global-nav {
+    margin-left: auto; /* グローバルナビを右寄せ */
+  }
+  
+  .global-nav ul {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .global-nav ul li a {
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .global-nav ul li a:hover {
+    background-color: #1abc9c;
+    color: white;
+  }
+  
+  /* メインコンテンツ */
+  .content {
+    flex: 1;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  /* フッター */
+  .footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .global-nav ul {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .content {
+      margin: 10px;
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .global-nav ul li a {
+      padding: 6px 10px;
+      font-size: 0.9rem;
+    }
+  
+    .content {
+      padding: 15px;
+    }
+  }
+  
+  /* タブレット対応: 768px～1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .header-inner {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .global-nav ul {
+      gap: 15px;
+    }
+  
+    .global-nav ul li a {
+      font-size: 1rem;
+      padding: 10px 12px;
+    }
+  
+    .content {
+      margin: 15px;
+      padding: 25px;
+      font-size: 1.1rem;
+    }
+  
+    .footer {
+      font-size: 0.9rem;
+    }
+  }
+  
