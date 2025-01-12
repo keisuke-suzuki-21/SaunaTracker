@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
 
+  # ログイン回り
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
+  # QRコード
   get '/entry', to: 'pages#entry'
   get '/exit', to: 'pages#exit'
+
+  # api
   get 'pages/current_occupancy', to: 'pages#current_occupancy'
   post '/line/callback', to: 'line_webhook#callback'
 
