@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Myapp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>サウナ管理システム</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="layout">
+    <!-- ヘッダー -->
+    <header class="header">
+      <div class="header-inner">
+        <h1 class="title">サウナ管理システム</h1>
+        <nav class="global-nav">
+          <ul>
+            <li><a href="#">ダッシュボード</a></li>
+            <li><a href="#">顧客管理</a></li>
+            <li><a href="#">分析</a></li>
+            <li><a href="#">設定</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+    <!-- メインコンテンツ -->
+    <main class="content">
+      <%= yield %>
+    </main>
 
-  <body>
-    <%= yield %>
-  </body>
+    <!-- フッター -->
+    <footer class="footer">
+      <p>&copy; 2025 サウナ管理システム</p>
+    </footer>
+  </div>
+</body>
 </html>

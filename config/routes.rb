@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'dashboard#index'
+
   get '/entry', to: 'pages#entry'
   get '/exit', to: 'pages#exit'
   get 'pages/current_occupancy', to: 'pages#current_occupancy'
