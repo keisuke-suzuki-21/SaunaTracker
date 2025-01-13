@@ -20,6 +20,7 @@
             <li><a href="#">顧客管理</a></li>
             <li><a href="#">分析</a></li>
             <li><a href="#">設定</a></li>
+            <li><%= button_to 'ログアウト', logout_path, method: :delete, class: 'logout-btn', form: { class: 'logout-form' } %></li>
           </ul>
         </nav>
       </div>

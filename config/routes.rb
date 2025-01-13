@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # ログイン回り
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy', as: :logout # logout_pathヘルパーを定義
 
   # QRコード
   get '/entry', to: 'pages#entry'
