@@ -1,3 +1,7 @@
+/*
+*= require login
+*/
+
 /* ベーススタイル */
 body {
     font-family: 'Poppins', sans-serif;
@@ -50,23 +54,32 @@ body {
   .global-nav {
     margin-left: auto; /* グローバルナビを右寄せ */
   }
-  
+
   .global-nav ul {
     display: flex;
     gap: 20px;
   }
-  
-  .global-nav ul li a {
+
+  .global-nav ul li a, 
+  .global-nav ul li .logout-btn {
     font-weight: 500;
     padding: 8px 15px;
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    color: inherit; /* 他のリンクと同じ色 */
+    background-color: transparent;
+    border: none; /* ボタンのデフォルトの枠線を削除 */
+    cursor: pointer; /* ボタンとしての視覚的なヒント */
   }
-  
-  .global-nav ul li a:hover {
+
+  .global-nav ul li a:hover, 
+  .global-nav ul li .logout-btn:hover {
     background-color: #1abc9c;
     color: white;
   }
+
   
   /* メインコンテンツ */
   .content {
