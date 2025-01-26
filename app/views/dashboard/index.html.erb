@@ -1,2 +1,29 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="dashboard">
+  <section class="realtime-usage">
+    <h2>リアルタイム利用者数</h2>
+    <p><%= @current_users %>人</p>
+  </section>
+
+  <section class="customer-analysis">
+    <h2>お客様の属性分析</h2>
+    <div data-controller="hello">
+      Hello, world!
+    </div>
+    # <canvas data-controller="age-chart" data-age-groups="<%= @customer_data[:age_groups].to_json %>"></canvas>
+    </section>
+
+  <section class="line-messages">
+    <h2>LINEメッセージ配信状況</h2>
+    <p>送信数: <%= @messages_status[:sent] %></p>
+    <p>クリック率: <%= @messages_status[:clicked] %>％</p>
+  </section>
+
+  <section class="events">
+    <h2>直近のイベント</h2>
+    <ul>
+      <% @events.each do |event| %>
+        <li><%= event %></li>
+      <% end %>
+    </ul>
+  </section>
+</div>
