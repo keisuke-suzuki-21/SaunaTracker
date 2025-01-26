@@ -6,10 +6,7 @@
 
   <section class="customer-analysis">
     <h2>お客様の属性分析</h2>
-    <div data-controller="hello">
-      Hello, world!
-    </div>
-    # <canvas data-controller="age-chart" data-age-groups="<%= @customer_data[:age_groups].to_json %>"></canvas>
+    <canvas data-controller="age-chart" data-age-groups="<%= @customer_data[:age_groups].to_json %>"></canvas>
     </section>
 
   <section class="line-messages">
